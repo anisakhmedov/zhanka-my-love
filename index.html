@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Анкета девушки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#0b0c10; --card:#121317; --muted:#6b7280; --text:#e5e7eb; --accent:#60a5fa; --danger:#ef4444; --ok:#10b981; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text); }
+    .wrap { max-width: 980px; margin: 40px auto; padding: 0 16px; }
+    h1 { font-size: 28px; margin: 0 0 18px; }
+    .card { background: var(--card); border:1px solid #1f2937; border-radius: 14px; padding: 18px; margin-bottom: 18px; }
+    fieldset { border: 1px solid #1f2937; border-radius: 12px; padding: 16px; margin: 0 0 16px; }
+    legend { padding: 0 8px; color: var(--muted); font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+    .col-6 { grid-column: span 6; } .col-4 { grid-column: span 4; } .col-3 { grid-column: span 3; } .col-12 { grid-column: span 12; }
+    label { display:block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    input, select, textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border:1px solid #1f2937; background:#0f1014; color:var(--text); outline: none; }
+    textarea { min-height: 70px; resize: vertical; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .row { display:flex; gap:10px; align-items:center; }
+    .btn { cursor: pointer; border: 1px solid #1f2937; background:#0f1014; color:var(--text); padding:10px 14px; border-radius:10px; }
+    .btn:hover { border-color:#334155; }
+    .btn.accent { background:#0f172a; border-color:#334155; }
+    .btn.primary { background: var(--accent); border-color: transparent; color: #0b1020; font-weight: 600; }
+    .btn.ghost { background: transparent; }
+    .btn.danger { background: #1f0f12; border-color:#3b0d12; color:#ffb4b4; }
+    .flex { display:flex; gap:12px; flex-wrap:wrap; }
+    .siblings .item { border:1px dashed #253046; padding:12px; border-radius:10px; }
+    .bar { display:flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .status { font-size: 13px; }
+    .ok { color: var(--ok); }
+    .err { color: var(--danger); }
+    .footer { display:flex; gap:10px; justify-content:flex-end; margin-top: 8px; }
+    @media (max-width: 720px){ .col-6,.col-4,.col-3{ grid-column: span 12; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <h1 style="text-align: center;">АНКЕТА МОЕЙ ЛЮБИМОЙ ЖАНЕЧКИ</h1>
+      <div class="status" id="status"></div>
+    </div>
+
+    <form id="girlForm" class="card" novalidate>
+      <!-- Общая информация -->
+      <fieldset>
+        <legend>Основные данные</legend>
+        <div class="grid">
+          <div class="col-6">
+            <label>Полное имя фамилия отчество</label>
+            <input name="full_name" required placeholder="Вот сюда жанечка" />
+          </div>
+          <div class="col-3">
+            <label>Дата рождения</label>
+            <input name="birthday" type="date" />
+          </div>
+          <div class="col-3">
+            <label>Стиль</label>
+            <input name="style" placeholder="casual / sport / romantic" />
+          </div>
+          <div class="col-3">
+            <label>Рост (см)</label>
+            <input name="height_cm" type="number" min="0" step="1" placeholder="165" />
+          </div>
+          <div class="col-3">
+            <label>Вес (кг)</label>
+            <input name="weight_kg" type="number" min="0" step="0.1" placeholder="55" />
+          </div>
+          <div class="col-12">
+            <label>Заметки</label>
+            <textarea name="notes" placeholder="Еще какие ни будь примечания или добавки"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Размеры -->
+      <fieldset>
+        <legend>Размеры</legend>
+        <div class="grid">
+          <div class="col-3">
+            <label>Верх</label>
+            <input name="sizes.clothing_top" placeholder="S / M / 42" />
+          </div>
+          <div class="col-3">
+            <label>Низ</label>
+            <input name="sizes.clothing_bottom" placeholder="S / M / 42" />
+          </div>
+          <div class="col-3">
+            <label>Платье</label>
+            <input name="sizes.clothing_dress" placeholder="S / M / 42" />
+          </div>
+          <div class="col-3">
+            <label>Обувь</label>
+            <input name="sizes.shoes" placeholder="38" />
+          </div>
+          <div class="col-3">
+            <label>Кольцо (размер)</label>
+            <input name="sizes.ring" placeholder="16.5" />
+          </div>
+          <div class="col-3">
+            <label>Бюстгальтер</label>
+            <input name="sizes.bra" placeholder="75B" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Вкусы -->
+      <fieldset>
+        <legend>Вкусы и предпочтения (через запятую)</legend>
+        <div class="grid">
+          <div class="col-6">
+            <label>Любимые цвета</label>
+            <input name="preferences.favorite_colors" placeholder="розовый, белый" />
+          </div>
+          <div class="col-6">
+            <label>Любимые цветы</label>
+            <input name="preferences.favorite_flowers" placeholder="тюльпаны, орхидеи" />
+          </div>
+          <div class="col-6">
+            <label>Любимые духи</label>
+            <input name="preferences.favorite_perfumes" placeholder="Dior J'adore" />
+          </div>
+          <div class="col-6">
+            <label>Любимая кухня</label>
+            <input name="preferences.favorite_cuisine" placeholder="итальянская, узбекская" />
+          </div>
+          <div class="col-6">
+            <label>Любимые блюда</label>
+            <input name="preferences.favorite_dishes" placeholder="паста, плов" />
+          </div>
+          <div class="col-6">
+            <label>Сладости</label>
+            <input name="preferences.favorite_sweets" placeholder="шоколад, макаруны" />
+          </div>
+          <div class="col-6">
+            <label>Напитки</label>
+            <input name="preferences.favorite_drinks" placeholder="капучино, сок" />
+          </div>
+          <div class="col-6">
+            <label>Бренды</label>
+            <input name="preferences.favorite_brands" placeholder="Zara, H&M" />
+          </div>
+          <div class="col-6">
+            <label>Музыка</label>
+            <input name="preferences.favorite_music" placeholder="K-pop, поп" />
+          </div>
+          <div class="col-6">
+            <label>Фильмы/сериалы/жанры</label>
+            <input name="preferences.favorite_movies" placeholder="романтика, драмы" />
+          </div>
+          <div class="col-6">
+            <label>Книги/авторы</label>
+            <input name="preferences.favorite_books" placeholder="Джейн Эйр" />
+          </div>
+          <div class="col-6">
+            <label>Любимые места</label>
+            <input name="preferences.favorite_places" placeholder="парк, кафе у озера" />
+          </div>
+        </div>
+        <p class="hint">Подсказка: разделяй значения запятыми</p>
+      </fieldset>
+
+      <!-- Особенности -->
+      <fieldset>
+        <legend>Индивидуальные особенности</legend>
+        <div class="grid">
+          <div class="col-4">
+            <label>Аллергии (через запятую)</label>
+            <input name="features.allergies" placeholder="мёд, цитрус" />
+          </div>
+          <div class="col-4">
+            <label>Косметика (бренды/линейки)</label>
+            <input name="features.cosmetics" placeholder="Maybelline, Sephora" />
+          </div>
+          <div class="col-4">
+            <label>Аксессуары</label>
+            <input name="features.accessories" placeholder="кольца, браслеты" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Мечты и планы -->
+      <fieldset>
+        <legend>Мечты и планы</legend>
+        <div class="grid">
+          <div class="col-6">
+            <label>Что хочет попробовать</label>
+            <input name="dreams.wants_to_try" placeholder="путешествие в Париж, верховая езда" />
+          </div>
+          <div class="col-6">
+            <label>Куда мечтает поехать</label>
+            <input name="dreams.travel_destinations" placeholder="Франция, Турция" />
+          </div>
+          <div class="col-6">
+            <label>Страхи</label>
+            <input name="dreams.fears" placeholder="высота" />
+          </div>
+          <div class="col-6">
+            <label>Что делает счастливой в быту</label>
+            <input name="dreams.daily_happiness" placeholder="гулять с любимым, кофе" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Семья -->
+      <fieldset class="family">
+        <legend>Семья</legend>
+        <div class="grid">
+          <div class="col-4">
+            <label>Мама — имя</label>
+            <input name="family.mother.name" placeholder="Полное имя фамилия отчество" />
+          </div>
+          <div class="col-4">
+            <label>Мама — дата рождения</label>
+            <input name="family.mother.birthday" type="date" />
+          </div>
+          <div class="col-4">
+            <label>Мама — род занятий</label>
+            <input name="family.mother.occupation" placeholder="врач" />
+          </div>
+
+          <div class="col-4">
+            <label>Папа — имя</label>
+            <input name="family.father.name" placeholder="Полное имя фамилия отчество" />
+          </div>
+          <div class="col-4">
+            <label>Папа — дата рождения</label>
+            <input name="family.father.birthday" type="date" />
+          </div>
+          <div class="col-4">
+            <label>Папа — род занятий</label>
+            <input name="family.father.occupation" placeholder="инженер" />
+          </div>
+        </div>
+
+        <div class="bar" style="margin-top:12px;">
+          <div style="color:var(--muted); font-size:13px;">Братья и сёстры</div>
+          <button type="button" class="btn accent" id="addSiblingBtn">+ Добавить</button>
+        </div>
+        <div class="siblings" id="siblings"></div>
+      </fieldset>
+
+      <div class="footer">
+        <button type="reset" class="btn ghost">Сброс</button>
+        <button type="submit" class="btn primary">Сохранить</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // === Конфиг эндпоинта ===
+    const API_URL = "https://zhanka-0014fc790f73.herokuapp.com/api/girls"; // поменяй при необходимости
+
+    // Утилиты
+    const by = (sel, root=document) => root.querySelector(sel);
+    const all = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const statusEl = by("#status");
+
+    // Простой helper для строк -> массив строк
+    function toArray(str) {
+      if (!str) return [];
+      return str
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    // Преобразование "a.b.c" в объект {a:{b:{c:value}}} и мёрдж в целевой объект
+    function setDeep(target, path, value) {
+      const keys = path.split(".");
+      let obj = target;
+      for (let i = 0; i < keys.length - 1; i++) {
+        const k = keys[i];
+        if (!obj[k] || typeof obj[k] !== "object") obj[k] = {};
+        obj = obj[k];
+      }
+      obj[keys[keys.length - 1]] = value;
+      return target;
+    }
+
+    // Добавление блока "брат/сестра"
+    const siblingsWrap = by("#siblings");
+    by("#addSiblingBtn").addEventListener("click", () => addSibling());
+
+    function addSibling(data={}) {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        <div class="grid" style="grid-template-columns: auto;">
+          <div class="col-5">
+            <label>Имя</label>
+            <input name="name" placeholder="Полное имя фамилия отчество" value="${data.name || ""}" />
+          </div>
+          <div class="col-3">
+            <label>Возраст</label>
+            <input name="age" type="number" min="0" step="1" placeholder="12" value="${data.age ?? ""}" />
+          </div>
+          <div class="col-3">
+            <label>Кто?</label>
+            <select name="relation">
+              <option value="">—</option>
+              <option ${data.relation==="брат"?"selected":""}>брат</option>
+              <option ${data.relation==="сестра"?"selected":""}>сестра</option>
+            </select>
+          </div>
+          <div class="col-1" style="display:flex;align-items:end;">
+            <button type="button" class="btn danger remove">✕</button>
+          </div>
+        </div>
+      `;
+      div.querySelector(".remove").addEventListener("click", () => div.remove());
+      siblingsWrap.appendChild(div);
+    }
+
+    // Сбор данных формы -> payload по схеме Mongoose
+    function buildPayload(form) {
+      const payload = {};
+      const inputs = all("input[name], textarea[name], select[name]", form);
+
+      for (const el of inputs) {
+        const name = el.getAttribute("name");
+        let value = el.value.trim();
+
+        // Превращаем некоторые поля в массивы
+        const isArrayField =
+          name.startsWith("preferences.") ||
+          name.startsWith("features.") ||
+          name.startsWith("dreams.");
+
+        if (isArrayField) {
+          value = toArray(value);
+        } else if (["height_cm","weight_kg"].includes(name)) {
+          value = value === "" ? undefined : Number(value);
+        } else if (name.includes("birthday")) {
+          value = value ? new Date(value).toISOString() : undefined;
+        } else if (value === "") {
+          value = undefined;
+        }
+
+        if (value !== undefined) setDeep(payload, name, value);
+      }
+
+      // Братья/сестры
+      const siblings = [];
+      siblingsWrap.querySelectorAll(".item").forEach(item => {
+        const [nameEl, ageEl, relationEl] = item.querySelectorAll("input, select");
+        const one = {
+          name: nameEl.value.trim(),
+          age: ageEl.value ? Number(ageEl.value) : undefined,
+          relation: relationEl.value || undefined,
+        };
+        if (one.name || one.age !== undefined || one.relation) siblings.push(one);
+      });
+      if (siblings.length) setDeep(payload, "family.siblings", siblings);
+
+      return payload;
+    }
+
+    // Отправка
+    by("#girlForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "";
+      const form = e.currentTarget;
+
+      if (!form.full_name.value.trim()) {
+        statusEl.innerHTML = '<span class="err">Введите полное имя</span>';
+        form.full_name.focus();
+        return;
+      }
+
+      const payload = buildPayload(form);
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error || "Ошибка сохранения");
+        statusEl.innerHTML = '<span class="ok">Сохранено успешно 💋</span>';
+        alert('все отлично, спасибо жанечка💋')
+        // Можно очистить форму, если нужно:
+        // form.reset(); siblingsWrap.innerHTML = "";
+        console.log("Saved:", data);
+      } catch (err) {
+        console.error(err);
+        statusEl.innerHTML = '<span class="err">Ошибка: ' + err.message + "</span>";
+      }
+    });
+  </script>
+</body>
+</html>
